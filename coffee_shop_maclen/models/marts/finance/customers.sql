@@ -8,7 +8,7 @@ with customer_orders as (
      , count(*) as n_orders
      , min(created_at) as first_order_at
 
-  from {{ source('coffee_shop', 'orders') }} as orders
+  from {{ ref('stg_coffee_shop__orders') }} as orders
   group by 1
 )
 
