@@ -1,16 +1,20 @@
 with source as (
-    select * from {{ source('github', 'issue_merged')}}
+    select * from {{ source('github', 'issue_merged') }}
 ),
 
 renamed as (
-  select
-    issue_id,
-    actor_id as merge_user_id,
-    commit_sha,
-    merged_at
-    -- _fivetran_synced
+    select
+        issue_id,
+        actor_id as merge_user_id,
 
-  from source
+        commit_sha,
+
+        -- timestamps
+        merged_at,
+
+        -- excluded columns
+        -- _fivetran_synced,
+    from source
 )
 
 select * from renamed

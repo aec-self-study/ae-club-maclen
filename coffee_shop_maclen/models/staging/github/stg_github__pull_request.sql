@@ -1,5 +1,7 @@
 with source as (
-  select * from {{ source('github', 'pull_request') }}
+
+    select * from {{ source('github', 'pull_request') }}
+
 ),
 
 renamed as (
@@ -19,9 +21,13 @@ renamed as (
         head_repo_id,
         head_sha,
         head_user_id,
-        merge_commit_sha
-        --_fivetran_synced,
+        merge_commit_sha,
+
+        -- excluded
+        -- _fivetran_synced,
+
     from source
+
 )
 
 select * from renamed
